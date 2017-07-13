@@ -16,6 +16,7 @@
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 <link href="/static/css/style.css" rel="stylesheet">
 
+	
 <!--[if lt IE 9]>
 		<script src="static/js/html5shiv.min.js"></script>
 		<script src="static/js/respond.min.js"></script>
@@ -37,7 +38,7 @@
 				<hr>
 				<div>
 					<input type="text" id="userName">
-					<input type="button" value="Find" id="findUserButton">
+					<button class="find" name="findUserButton">Find</button>
 					
 				</div>
 				<div class="table-responsive">
@@ -72,14 +73,14 @@
 			</div>
 		</div>
 	</div>
-	<script src="static/js/jquery-1.11.1.min.js"></script>
-	<script src="static/js/bootstrap.min.js"></script>
 	
-	<!-- <script type="text/javascript">
-		$('#findUserButton').on('click', function(){
-			alert('test');
-			alert($('#userName').val());
-		});
-	</script> -->
+	<script src="/static/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+        $('.find').on('click', function () {
+        	alert('test');
+            window.location.href = '/user/find/' + $('#userName').val();
+        });
+    </script>
 </body>
 </html>

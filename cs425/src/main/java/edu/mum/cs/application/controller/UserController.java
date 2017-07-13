@@ -37,14 +37,14 @@ public class UserController {
     }
 
     //commit by Pagmaa
-    @RequestMapping(value = "/User/find", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/find", method = RequestMethod.GET)
     public String findUser(Model model) {
        model.addAttribute("users", userService.findUsers(""));
 
         return "findUser";
     }
     
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
@@ -58,7 +58,7 @@ public class UserController {
 
         return "redirect:/welcome";
         
-    }
+    }*/
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
