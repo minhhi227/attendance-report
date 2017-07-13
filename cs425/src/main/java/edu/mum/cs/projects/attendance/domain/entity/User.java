@@ -60,6 +60,8 @@ public class User {
     }
     
     
-   
+   /* public String getRoleDefault() {
+        return roles.iterator().next().getName();
+    }*/
     
 }
