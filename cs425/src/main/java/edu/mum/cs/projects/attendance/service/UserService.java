@@ -10,4 +10,5 @@ public interface UserService {
 	void save(User user);
 	User findByUsername(String username);
 	List<Role> getRoles(String username);
+	List<User> findUsers(String username);
 }

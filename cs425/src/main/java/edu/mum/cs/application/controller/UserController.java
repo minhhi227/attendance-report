@@ -36,6 +36,14 @@ public class UserController {
         return "registration";
     }
 
+    //commit by Pagmaa
+    @RequestMapping(value = "/User/find", method = RequestMethod.GET)
+    public String findUser(Model model) {
+       model.addAttribute("users", userService.findUsers(""));
+
+        return "findUser";
+    }
+    
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);

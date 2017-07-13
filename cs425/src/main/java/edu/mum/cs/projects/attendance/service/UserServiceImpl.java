@@ -1,5 +1,6 @@
 package edu.mum.cs.projects.attendance.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,26 +15,39 @@ import edu.mum.cs.projects.attendance.repository.RoleRepository;
 import edu.mum.cs.projects.attendance.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(user);
-    }
+	@Override
+	public void save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setRoles(new HashSet<>(roleRepository.findAll()));
+		userRepository.save(user);
+	}
 
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	// commit by Pagmaa
+	@Override
+	public List<User> findUsers(String username) {
+    	if(username.isEmpty()){
+    		return userRepository.findAll();
+    	}
+    	else{
+    		List<User> users = new ArrayList<User>();
+    		users.add(userRepository.findByUsername(username));
+		  	return users;
+    		}
+	}
 
 	@Override
 	public List<Role> getRoles(String username) {
@@ -41,10 +55,11 @@ public class UserServiceImpl implements UserService{
 		return findByUsername(username).getRoles().stream().collect(Collectors.toList());
 	}
 
-//	@Override
-//	public String getRole(String username) {
-//		// TODO Auto-generated method stub
-//		return findByUsername(username).getRoles().stream().limit(1).collect(Collectors.toList()).get(0).getName();
-//	}
-   
+	// @Override
+	// public String getRole(String username) {
+	// // TODO Auto-generated method stub
+	// return
+	// findByUsername(username).getRoles().stream().limit(1).collect(Collectors.toList()).get(0).getName();
+	// }
+
 }
