@@ -35,6 +35,11 @@
 			<div class="col-md-6">
 				<h3>Users:</h3>
 				<hr>
+				<div>
+					<input type="text" id="userName">
+					<input type="button" value="Find" id="findUserButton">
+					
+				</div>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered text-left">
 						<thead>
@@ -69,5 +74,12 @@
 	</div>
 	<script src="static/js/jquery-1.11.1.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
+	
+	<!-- <script type="text/javascript">
+		$('#findUserButton').on('click', function(){
+			alert('test');
+			alert($('#userName').val());
+		});
+	</script> -->
 </body>
 </html>
