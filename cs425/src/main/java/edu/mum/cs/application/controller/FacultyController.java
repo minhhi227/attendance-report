@@ -21,4 +21,10 @@ public class FacultyController {
 		request.setAttribute("mode", "MODE_COURSE");
 		return "faculty";
 	}
+	
+	@GetMapping("/faculty-Courses")
+	public String facultyCourses(HttpServletRequest request){
+		
+		return "faculty";
+	}
 }
