@@ -17,7 +17,8 @@
     <title>Log in with your account</title>
 
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/common.css" rel="stylesheet">
+    <link href="static/css/myfile.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -49,6 +50,7 @@
 
 </div>
 <!-- /container -->
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
+    <script src="static/js/bootstrap.min.js"></script>
 </body>
 </html>

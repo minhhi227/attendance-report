@@ -23,8 +23,10 @@ public interface CourseService {
 
 	List<ComproEntry> getComproEntries(String startDate);
 
-	List<CourseOffering> getCourseOfferings(String blockId);//use
+	List<CourseOffering> getCourseOfferings(String blockId);
 
 	AcademicBlock getAcademicBlock(String blockStartDate);
+	
+	CourseOffering getCourseOffering(Long id);
 	
 }

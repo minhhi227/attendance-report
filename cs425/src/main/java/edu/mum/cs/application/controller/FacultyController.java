@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+/**
+ * Created by minh hieu on 7/5/2017.
+ */
 @Controller
 public class FacultyController {
 

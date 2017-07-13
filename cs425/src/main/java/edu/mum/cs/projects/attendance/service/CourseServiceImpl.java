@@ -76,4 +76,10 @@ public class CourseServiceImpl implements CourseService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public CourseOffering getCourseOffering(Long id) {
+		// TODO Auto-generated method stub
+		return courseOfferingRepository.findById(id);
+	}
+
 }

@@ -2,6 +2,9 @@ package edu.mum.cs.projects.attendance.service;
 
 import java.util.List;
 
+import edu.mum.cs.projects.attendance.domain.StudentAttendance;
+import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
+import edu.mum.cs.projects.attendance.domain.entity.Enrollment;
 import edu.mum.cs.projects.attendance.domain.entity.Student;
 
 /**
@@ -18,12 +21,16 @@ public interface StudentService {
 	
 	static final StudentService INSTANCE = new StudentServiceImpl();
 	
-	List<Student> getStudentsByEntry(String entryDate);//use
+	List<Student> getStudentsByEntry(String entryDate);
 	
-	String getBarcodeId(String studentId);//use
+	String getBarcodeId(String studentId);
 
 	static StudentService getInstance() {
 		return INSTANCE;
 	}
 	
+	List<Enrollment> getEnrolledByStudentId(String studentId);
+	Student findStudentById(String studentId);
+	
+	StudentAttendance getAttendanceByCourseOffering(String studentId, CourseOffering courseOffering);
 }

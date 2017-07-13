@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
+//change
 @SpringBootApplication(scanBasePackages={"edu.mum.cs"})
 public class WebApplication extends SpringBootServletInitializer {
     @Override
