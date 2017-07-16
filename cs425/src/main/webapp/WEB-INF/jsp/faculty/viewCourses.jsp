@@ -25,46 +25,50 @@
 
 	
 	<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
-	
+
 	<div class="container">
-		<h3 id="facultyViewCourse">Courses Taught for The past Six Months</h3>
+		<h1>Courses Taught for The past Six Months</h1><hr>
 
 
-<c:choose>
-<c:when test ="${listOfAll.size()!=0}" >
-<table>
-<tr>
-								<th>Id</th>
-								<th>Faculty</th>
-								<th>Course-Name</th>
-								<th>Course-StartDate</th>
-								 <th>Course-Number</th>
-							  
-							</tr>
-  <c:forEach items="${listOfAll}" var="course">
-    <tr>
-      <td><c:out value="${course.faculty.id}" /></td>
-      <td><c:out value="${course.faculty}" /></td>
-      <td><c:out value="${course.course.name}" /></td>
-       <td><c:out value="${course.startDate}" /></td>
-        <td><c:out value="${course.course.number}" /></td>
-       
-       
-    </tr>
-  </c:forEach>
-
-</table>
-</c:when>
-<c:otherwise>
+		<c:choose>
+			<c:when test="${listOfAll.size()!=0}">
+				<table>
+					<tr>
+						<th>Course-Number</th>
+						<th>Course-Name</th>
+						<th>Course-StartDate</th>
+						<th>Enrolled</th>
+						<th>Capacity</th>
+						<th>Active</th>
 
 
- <b>No Record is found for the past six Months!</b>
 
 
-</c:otherwise>
+					</tr>
+					<c:forEach items="${listOfAll}" var="course">
+						<tr>
+							<td><c:out value="${course.course.number}" /></td>
+							<td><c:out value="${course.course.name}" /></td>
+							<td><c:out value="${course.startDate}" /></td>
+							<td><c:out value="${course.enrolled}" /></td>
+							<td><c:out value="${course.capacity}" /></td>
+							<td><c:out value="${course.active}" /></td>
 
-</c:choose>
- </div>
- 
+						</tr>
+					</c:forEach>
+
+				</table>
+			</c:when>
+			<c:otherwise>
+
+
+				<b>No Record is found for the past six Months!</b>
+
+
+			</c:otherwise>
+
+		</c:choose>
+	</div>
+
 </body>
 </html>

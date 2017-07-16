@@ -29,6 +29,6 @@ public interface CourseService {
 	
 	CourseOffering getCourseOffering(Long id);
 	List<CourseOffering> getCourseOfferingByFaculty(Long facultyId);
-	List<CourseOffering> allOfferingCourse();
+	//List<CourseOffering> allOfferingCourse();
 	
 }

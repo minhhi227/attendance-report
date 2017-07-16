@@ -1,6 +1,7 @@
 package edu.mum.cs.projects.attendance.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -82,16 +83,37 @@ public class CourseServiceImpl implements CourseService {
 		return courseOfferingRepository.findById(id);
 	}
 	
+	// @Override
+	// public List<CourseOffering> allOfferingCourse(){
+	// return courseOfferingRepository.findAll();
+	// }
 	@Override
 	public List<CourseOffering> getCourseOfferingByFaculty(Long facultyId) {
-		// TODO Auto-generated method stub
-		return courseOfferingRepository.findByFacultyId(facultyId);
+
+		List<CourseOffering> allCoursesByFacultyId = courseOfferingRepository.findByFacultyId(facultyId);
+		List<CourseOffering> lastSixMonthCourses = new ArrayList<>();
+		LocalDate today = LocalDate.now();
+		LocalDate beforeSixMonths = today.minusMonths(6);
+
+		for (CourseOffering course : allCoursesByFacultyId) {
+			if (facultyId == course.getFaculty().getId()) {
+				Date startDate = course.getStartDate();
+				String startDatecon = startDate.toString();
+				LocalDate entryDate = LocalDate.parse(startDatecon);
+				if (entryDate.isAfter(beforeSixMonths) && entryDate.isBefore(today)) {
+
+					lastSixMonthCourses.add(course);
+
+				}
+
+			}
+
+		}
+
+		return lastSixMonthCourses.stream().sorted(Comparator.comparing(CourseOffering::getStartDate).reversed())
+				                   .collect(Collectors.toList());
 	}
 	
-	//By me 
-		@Override
-		public   List<CourseOffering> allOfferingCourse(){
-			return courseOfferingRepository.findAll();
-		}
+
 
 }
