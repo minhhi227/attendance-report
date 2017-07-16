@@ -77,13 +77,23 @@ table {
   width: 100%;
 }
 th, td {
-  width: 25%;
+  
   text-align: left; 
   vertical-align: top; 
   border: 1px solid #000;
   border-collapse: collapse;
   padding: 0.3em;
   caption-side: bottom; 
+}
+
+th.name, th.date {
+  width: 20%
+}
+th.number, th.attend {
+  width: 15%
+}
+th.period, th.faculty {
+  width: 15%; 
 }
 
 caption {
