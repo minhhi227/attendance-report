@@ -26,7 +26,6 @@
 <%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
 			<div class="container text-center" id="tasksDiv">
-				<h3>My Attendance</h3>
 				<h1>${msg}</h1>
 				<hr>
 				<div class="table-responsive">

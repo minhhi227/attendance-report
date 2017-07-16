@@ -69,7 +69,7 @@ public class StudentController {
 		String msg = "";
 		try
         {
-			msg = "Detail record";
+			msg = "Detail Record";
 		    StudentAttendance attendance = studentServiceImpl.getAttendanceByCourseOffering(principal.getName(), courseOffering);
        
 		    model.addAttribute("meditaionPercentage", (int)attendance.getMeditaionPercentage());
@@ -87,7 +87,7 @@ public class StudentController {
         }
 		catch(NullPointerException e)
         {
-			msg = "No record";
+			msg = "No Record";
         }
 		model.addAttribute("msg",msg);
 		model.addAttribute("userName", principal.getName());

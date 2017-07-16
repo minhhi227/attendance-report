@@ -26,7 +26,7 @@
 	<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
 			<div class="container text-center" id="tasksDiv">
-				<h3>My Courses</h3>
+				<h3>Course List</h3>
 				<hr>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered text-left">
