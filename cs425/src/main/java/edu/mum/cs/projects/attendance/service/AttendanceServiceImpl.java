@@ -47,6 +47,7 @@ import edu.mum.cs.projects.attendance.util.DateUtil;
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
 
+	
 	@Autowired
 	private EmailService emailService;
 
@@ -60,6 +61,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 	BarcodeRecordRepository barcodeRecordRepository;
 
 	@Override
+
 	public void countAttendancePerDay() {
 		List<BarcodeRecord> records = new LinkedList<>();
 		barcodeRecordRepository.findAll().forEach(br -> records.add(br));

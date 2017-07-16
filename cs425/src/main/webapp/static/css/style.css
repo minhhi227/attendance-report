@@ -1,6 +1,18 @@
 .invisible-at-first {
 	display: none;
 }
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color:#d4e3e0;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
  #facultyList {
  position :fixed;
   list-style-type: none;
@@ -42,9 +54,7 @@
     color: white;
 }
 
-//body{
-	background-color:#d4e3e0;
-//}
+
 #facultyPage ,#facultyViewCourse{
 	text-align:left;
 	margine-left:5px;

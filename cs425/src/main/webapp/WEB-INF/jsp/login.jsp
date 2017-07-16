@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log in with your account</title>
+    <title>Log in the Attendance Report System</title>
 
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/common.css" rel="stylesheet">
@@ -29,24 +29,27 @@
 
 <body>
 
-<div class="container">
-
+<div class="container centered">
+<div class="row">
+	<div class="col-sm-4" align="center">
     <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
-
+        <h2 class="form-heading">Log in the system</h2>
+		<hr>
         <div class="form-group ${error != null ? 'has-error' : ''}">
+           
             <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
-                   autofocus="true"/>
+            <input name="username" type="text" class="form-control" placeholder="Username" autofocus="true"/>
             <input name="password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
+            <br/>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+           
         </div>
-
-    </form>
+        </form>
+	</div>
+</div>
+    
 
 </div>
 <!-- /container -->

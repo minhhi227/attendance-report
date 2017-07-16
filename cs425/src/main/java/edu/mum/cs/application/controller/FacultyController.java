@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
 import edu.mum.cs.projects.attendance.service.CourseService;
@@ -20,32 +22,25 @@ import edu.mum.cs.projects.attendance.service.CourseService;
  * Created by minh hieu on 7/5/2017.
  */
 @Controller
+@RequestMapping("/faculty")
 public class FacultyController {
 	@Autowired
 	  private CourseService  courseService ;
-	@GetMapping("/faculty")
-	public String faculty(HttpServletRequest request){
-		return "faculty";
-	}
 	
-	@GetMapping("/faculty-students")
-	public String facultyStudent(HttpServletRequest request){
-		request.setAttribute("mode", "MODE_COURSE");
-		return "faculty";
-	}
-	
-	@GetMapping("/faculty-Courses")
-	public String facultyCourses(HttpServletRequest request){
+		
+		
+	@RequestMapping("/courses")
+	public String facultyCourses(HttpServletRequest request, Model model){
 		
 	  Principal principal = request.getUserPrincipal();
 	  //System.out.println("---------"+principal.getName());
-		String id=principal.getName();
+		
 		
 		 //String id=principal.getName();
 		// System.out.println(id);
 		
 		
-		int iD=Integer.parseInt(id);
+		/*int iD=Integer.parseInt(id);
 		LocalDate today=LocalDate.now();
 		LocalDate beforeSixMonths =today.minusMonths(6);
 		
@@ -70,12 +65,12 @@ public class FacultyController {
 			
 		
 		System.out.println(listOfAllCourses);
-	System.out.println(listOfAllCourses.size());
-			
+	System.out.println(listOfAllCourses.size());*/
+		model.addAttribute("userName", principal.getName());
 		
-	request.setAttribute("listOfAll",listOfAllCourses);
+		model.addAttribute("listOfAll", courseService.getCourseOfferingByFaculty(Long.parseLong("107")));
 
-		return "courseViewByFaculty";
+		return "faculty/viewCourses";
 		
 	}
 	}

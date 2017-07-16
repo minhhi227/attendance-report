@@ -82,6 +82,12 @@ public class CourseServiceImpl implements CourseService {
 		return courseOfferingRepository.findById(id);
 	}
 	
+	@Override
+	public List<CourseOffering> getCourseOfferingByFaculty(Long facultyId) {
+		// TODO Auto-generated method stub
+		return courseOfferingRepository.findByFacultyId(facultyId);
+	}
+	
 	//By me 
 		@Override
 		public   List<CourseOffering> allOfferingCourse(){
