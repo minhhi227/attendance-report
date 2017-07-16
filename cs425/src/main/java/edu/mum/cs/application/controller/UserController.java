@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,6 +17,7 @@ import edu.mum.cs.projects.attendance.service.UserService;
 import edu.mum.cs.projects.attendance.service.UserValidator;
 
 @Controller
+
 public class UserController {
 
 	@Autowired
@@ -35,11 +37,20 @@ public class UserController {
     }
 
     //commit by Pagmaa
-    @RequestMapping(value = "/user/find", method = RequestMethod.GET)
-    public String findUser(Model model) {
-       model.addAttribute("users", userService.findUsers(""));
-
-        return "findUser";
+    @RequestMapping(value = "/user/find/{userName}?", method = RequestMethod.GET)
+    public String findUser(@PathVariable String userName, Model model, HttpServletRequest request) {
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
+        model.addAttribute("users", userService.findUsers(userName));
+       
+        return "/user/find";
+    }
+    
+    @RequestMapping(value = "/user/find/", method = RequestMethod.GET)
+    public String findUserAll(Model model, HttpServletRequest request) {
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
+        model.addAttribute("users", userService.findUsers(""));
+       
+        return "/user/find";
     }
     
    /* @RequestMapping(value = "/registration", method = RequestMethod.POST)
