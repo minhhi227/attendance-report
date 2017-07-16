@@ -28,5 +28,6 @@ public interface CourseService {
 	AcademicBlock getAcademicBlock(String blockStartDate);
 	
 	CourseOffering getCourseOffering(Long id);
+	List<CourseOffering> allOfferingCourse();
 	
 }

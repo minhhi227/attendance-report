@@ -1,3 +1,87 @@
 .invisible-at-first {
 	display: none;
 }
+ #facultyList {
+ position :fixed;
+  list-style-type: none;
+    width:25%;
+    height: 140%;
+    margin-top: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:#000000;
+    border-radius:19px;
+     border-style:outset;  
+    opacity: 0.7;
+    border-color:#0d302d 
+  
+}
+
+#rigthLogout{
+	float:right;
+	margin-top:-40pt;
+	margin-right:10pt;
+	font-size:14pt;
+}
+
+.list a {
+    display: block;
+    color: #f8fffc;
+    padding: 8px 16px;
+    text-decoration: underline ;
+    font-size:14pt;
+}
+
+.list a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.list a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+//body{
+	background-color:#d4e3e0;
+//}
+#facultyPage ,#facultyViewCourse{
+	text-align:left;
+	margine-left:5px;
+	color:blue;
+}
+#facultyViewCourse{text-align:center;}
+
+   .courseList{
+   position:absolute;
+   background-color:#7d8172;
+	margin-left:60pt;
+	width:40%;
+	height:60%;
+	border:23 solid light-gray;
+}
+span{
+	color:red;
+}
+table {
+  width: 100%;
+}
+th, td {
+  width: 25%;
+  text-align: left; 
+  vertical-align: top; 
+  border: 1px solid #000;
+  border-collapse: collapse;
+  padding: 0.3em;
+  caption-side: bottom; 
+}
+
+caption {
+  padding: 0.3em;
+  color: #fff;
+  background: #000;
+}
+
+th {
+  background: #eee;
+}
