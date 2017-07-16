@@ -21,8 +21,7 @@ public class FacultyController {
 	@Autowired
 	  private CourseService  courseService ;
 	
-		
-		
+				
 	@RequestMapping("/courses")
 	public String facultyCourses(HttpServletRequest request, Model model) {
 
@@ -34,5 +33,6 @@ public class FacultyController {
 		return "faculty/viewCourses";
 
 	}
-	}
+	
+}
 

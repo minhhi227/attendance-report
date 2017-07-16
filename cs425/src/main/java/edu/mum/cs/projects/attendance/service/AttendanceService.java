@@ -27,6 +27,8 @@ public interface AttendanceService {
 
 	void emailReportToStudentsForOffering(CourseOffering courseOffering);
 
+	List<StudentAttendance> getStudentAttendanceRecordsByCourseOffering(Long CourseOfferingId);
+	
 	List<StudentAttendance> retrieveStudentAttendanceRecords(CourseOffering courseOffering);
 
 	void createAttendanceReportForEntries(String startDate);

@@ -30,6 +30,32 @@
 	<div class="col-sx-12"> 
 	<h1>View attendance by course</h1>
 	<hr>
+	
+	<c:choose>
+			<c:when test="${studentattendances.size()!=0}">
+				<table>
+					<tr>
+						<th>Course-Number</th>
+						<th>Course-Name</th>
+						<th>Course-StartDate</th>
+						<th>Enrolled</th>
+						<th>Capacity</th>
+						<th>Active</th>
+
+
+					</tr>
+					<c:forEach items="${studentattendances}" var="studentattendance">
+						<tr>
+							<td><c:out value="${studentattendance.courseOffering.id}" /></td>
+						</tr>
+					</c:forEach>
+
+				</table>
+			</c:when>
+			<c:otherwise>
+				<b>No Record is found for the past six Months!</b>
+			</c:otherwise>
+	</c:choose>
 	</div>
 	
 	<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>

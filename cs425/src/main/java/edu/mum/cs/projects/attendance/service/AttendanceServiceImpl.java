@@ -156,6 +156,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return studentAttendanceRecords;
 	}
 
+	public List<StudentAttendance> getStudentAttendanceRecordsByCourseOffering(Long CourseOfferingId){
+		CourseOffering courseOffering = courseService.getCourseOffering(CourseOfferingId);
+		
+		return retrieveStudentAttendanceRecords(courseOffering);
+	}
+	
 	private Function<StudentAttendance, StudentAttendance> populateAttendanceArray(List<BarcodeRecord> barcodeRecords,
 			List<Session> sessions) {
 		return sa -> {

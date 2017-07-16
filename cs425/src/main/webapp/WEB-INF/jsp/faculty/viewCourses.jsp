@@ -11,14 +11,14 @@
     <meta http-equiv="Cache-Control" content="no-cache"> 
     <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
     
-    <title>Student Manager | Home</title>
+    <title>Faculty courses | Home</title>
     
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
     
     <!--[if lt IE 9]>
-		<script src="static/js/html5shiv.min.js"></script>
-		<script src="static/js/respond.min.js"></script>
+		<script src="/static/js/html5shiv.min.js"></script>
+		<script src="/static/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body>
@@ -27,10 +27,11 @@
 	<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
 	<div class="container">
-		<h1>Courses Taught for The past Six Months</h1><hr>
+		<h1>Students attendance by course</h1><hr>
 
 
-		<c:choose>
+		
+	<c:choose>
 			<c:when test="${listOfAll.size()!=0}">
 				<table>
 					<tr>
@@ -69,6 +70,6 @@
 
 		</c:choose>
 	</div>
-
+<script src="/static/js/jquery-1.11.1.min.js"></script>    
 </body>
 </html>

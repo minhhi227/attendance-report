@@ -42,7 +42,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/user/find/{userName}?", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/find/{userName}", method = RequestMethod.GET)
     public String findUser(@PathVariable String userName, Model model, HttpServletRequest request) {
     	model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("users", userService.findUsers(userName));
@@ -50,7 +50,7 @@ public class UserController {
         return "/user/find";
     }
     
-    @RequestMapping(value = "/user/find/", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/find", method = RequestMethod.GET)
     public String findUserAll(Model model, HttpServletRequest request) {
     	model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("users", userService.findUsers(""));
