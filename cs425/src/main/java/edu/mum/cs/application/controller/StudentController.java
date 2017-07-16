@@ -14,6 +14,7 @@ import edu.mum.cs.projects.attendance.service.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ import javax.servlet.http.HttpServletRequest;
  * Updated by minh hieu on 7/13/2017
  */
 @Controller
+@RequestMapping("/student")
 public class StudentController {
 	
 	@Autowired
@@ -46,20 +48,20 @@ public class StudentController {
 	private StudentServiceImpl studentServiceImpl;
 
 	
-	@GetMapping("/students")
-	public String students(HttpServletRequest request){
+	@RequestMapping("/courses")
+	public String allCourseByStudent(HttpServletRequest request, Model model){
 		Principal principal = request.getUserPrincipal();
 		Date today = new Date();
-		request.setAttribute("studentid", principal.getName());
-		request.setAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(principal.getName()));
-		request.setAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
-		request.setAttribute("today", today);
-		request.setAttribute("mode", "MODE_COURSE");
-		return "students";
+		model.addAttribute("userName", principal.getName());
+		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(principal.getName()));
+		model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+		model.addAttribute("today", today);
+
+		return "student/viewCourses";
 	}
 	
-	@GetMapping("/all-attendance")
-	public String allAttendance(@RequestParam int id,HttpServletRequest request){
+	@RequestMapping(value = "/attendance/{id}", method=RequestMethod.GET)
+	public String allAttendanceByStudent(@PathVariable int id,HttpServletRequest request, Model model){
 		
 		Principal principal = request.getUserPrincipal();
 		
@@ -70,10 +72,10 @@ public class StudentController {
 			msg = "Detail record";
 		    StudentAttendance attendance = studentServiceImpl.getAttendanceByCourseOffering(principal.getName(), courseOffering);
        
-			request.setAttribute("meditaionPercentage", (int)attendance.getMeditaionPercentage());
-			request.setAttribute("meditationCount", attendance.getMeditationCount());
-			request.setAttribute("numberOfRequiredSessions", attendance.getNumberOfRequiredSessions());
-			request.setAttribute("extraGrade", attendance.getMeditationExtraGrade());
+		    model.addAttribute("meditaionPercentage", (int)attendance.getMeditaionPercentage());
+		    model.addAttribute("meditationCount", attendance.getMeditationCount());
+		    model.addAttribute("numberOfRequiredSessions", attendance.getNumberOfRequiredSessions());
+		    model.addAttribute("extraGrade", attendance.getMeditationExtraGrade());
 			
 			Map<String,Boolean> map = new LinkedHashMap<String,Boolean>();  
 
@@ -81,17 +83,17 @@ public class StudentController {
 		      map.put(attendance.getSessions().get(i).getDate().toString(), attendance.getAttendance().get(i));    
 		    }
 		    
-		request.setAttribute("map", map);
+		    model.addAttribute("map", map);
         }
 		catch(NullPointerException e)
         {
 			msg = "No record";
         }
-		request.setAttribute("msg",msg);
-		request.setAttribute("studentid", principal.getName());
-		request.setAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
-		request.setAttribute("mode", "MODE_ATTENDANCE");
-		return "students";
+		model.addAttribute("msg",msg);
+		model.addAttribute("userName", principal.getName());
+		model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+
+		return "student/viewAttendance";
 	}
 	
 

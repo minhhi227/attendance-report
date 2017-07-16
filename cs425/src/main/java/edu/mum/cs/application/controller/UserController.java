@@ -3,14 +3,19 @@ package edu.mum.cs.application.controller;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.mum.cs.projects.attendance.domain.entity.Role;
 import edu.mum.cs.projects.attendance.domain.entity.User;
 import edu.mum.cs.projects.attendance.service.SecurityService;
 import edu.mum.cs.projects.attendance.service.UserService;
@@ -32,11 +37,11 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-//change
+
         return "registration";
     }
 
-    //commit by Pagmaa
+
     @RequestMapping(value = "/user/find/{userName}?", method = RequestMethod.GET)
     public String findUser(@PathVariable String userName, Model model, HttpServletRequest request) {
     	model.addAttribute("userName", request.getUserPrincipal().getName());
@@ -69,32 +74,5 @@ public class UserController {
         
     }*/
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-        return "login";
-    }
-
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model, HttpServletRequest request) {
-    	Principal principal = request.getUserPrincipal();
-    	
-    	if(userService.getRoles(principal.getName()).size() == 1){
-    		if(userService.getRoles(principal.getName()).get(0).getName().equals("Student")){
-        		return "redirect:/students";
-        	}
-        	else{
-        		return "redirect:/faculty";
-        	}
-    	}
-    	else{
-    		return "redirect:/faculty-students";
-    	}
-    	
-    }
+    
 }

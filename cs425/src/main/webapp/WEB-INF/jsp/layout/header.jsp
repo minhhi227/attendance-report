@@ -14,23 +14,16 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    <li> Faculty
-                    
-                    <ul>
                     <li><a href="/faculty/courses"> View courses</a></li>
-                    </ul>
-                    </li>
-				
+				    <li><a href="/student/courses"> View courses</a></li>
 				</ul>
 				
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href=""> Welcome: ${userName}</a></li>
         			<li><a href="/logout">Log out</a></li>
+        		
         		</ul>
-        		
-        		
-        		
-        		
+
 			</div>
 		
 	 </div>
