@@ -70,10 +70,10 @@
 						</tbody>
 					</table>
 				</div>
-				
+				<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
 			</div>
 
-<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
+
 
 	<script src="/static/js/jquery-1.11.1.min.js"></script>    
     <script src="/static/js/bootstrap.min.js"></script>

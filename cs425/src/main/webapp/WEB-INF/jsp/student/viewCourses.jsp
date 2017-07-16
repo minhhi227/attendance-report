@@ -32,12 +32,12 @@
 					<table class="table table-striped table-bordered text-left">
 						<thead>
 							<tr>
-								<th>Course Number</th>
-								<th>Name</th>
-								<th>Start Date</th>
-								<th>Period</th>
-								<th>Faculty</th>
-								<th></th>
+								<th class="number">Course Number</th>
+								<th class="name">Name</th>
+								<th class="date">Start Date</th>
+								<th class="period">Period</th>
+								<th class="faculty">Faculty</th>
+								<th class="attend">View Attendance</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,10 +50,10 @@
 									<td>${enrolled.offering.faculty.firstName}</td>
 									<c:choose>
 									    <c:when test="${enrolled.offering.startDate <= today}">
-									        <td><a href="/student/attendance/${enrolled.offering.id}"><span class="glyphicon glyphicon-arrow-right"></span></a></td> 
+									        <td><a href="/student/attendance/${enrolled.offering.id}">View</a></td> 
 									    </c:when>    
 									    <c:otherwise>
-									        <td><span class="glyphicon glyphicon-ban-circle"></span></td>
+									        <td>Pending</td>
 									    </c:otherwise>
 									</c:choose>
 								</tr>
@@ -61,9 +61,9 @@
 						</tbody>
 					</table>
 				</div>
+				<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
 			</div>
 		
-<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
 
 	<script src="/static/js/jquery-1.11.1.min.js"></script>    
     <script src="/static/js/bootstrap.min.js"></script>
