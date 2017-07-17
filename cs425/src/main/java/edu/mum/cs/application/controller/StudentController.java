@@ -1,37 +1,26 @@
 package edu.mum.cs.application.controller;
 
-import edu.mum.cs.application.model.StudentViewModel;
-import edu.mum.cs.projects.attendance.domain.StudentAttendance;
-import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
-import edu.mum.cs.projects.attendance.domain.entity.Session;
-import edu.mum.cs.projects.attendance.domain.entity.Student;
-import edu.mum.cs.projects.attendance.ooxml.SpreadsheetReaderDAO;
-import edu.mum.cs.projects.attendance.service.AttendanceService;
-import edu.mum.cs.projects.attendance.service.AttendanceServiceImpl;
-import edu.mum.cs.projects.attendance.service.CourseServiceImpl;
-import edu.mum.cs.projects.attendance.service.StudentServiceImpl;
+import java.security.Principal;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
+import edu.mum.cs.projects.attendance.domain.StudentAttendance;
+import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
+import edu.mum.cs.projects.attendance.domain.entity.Student;
+import edu.mum.cs.projects.attendance.service.CourseServiceImpl;
+import edu.mum.cs.projects.attendance.service.StudentService;
+import edu.mum.cs.projects.attendance.service.StudentServiceImpl;
 
 /**
  * Created by orifjon9 on 7/5/2017.
@@ -46,7 +35,9 @@ public class StudentController {
 
 	@Autowired
 	private StudentServiceImpl studentServiceImpl;
-
+	
+	@Autowired
+	private StudentService studentService;
 	
 	@RequestMapping("/courses")
 	public String allCourseByStudent(HttpServletRequest request, Model model){
@@ -96,5 +87,34 @@ public class StudentController {
 		return "student/viewAttendance";
 	}
 	
+	
+	@RequestMapping("/findStudent")
+	public String student(HttpServletRequest request){
+		return "findStudent";
+		
+	}
+	//000-98-3209
+  @RequestMapping(value="/findStudentById", method = RequestMethod.GET)
+	public String findStudent(HttpServletRequest request, Model model) {
+
+		Principal principal = request.getUserPrincipal();
+		String studentId=request.getParameter("studentId");
+		Student studentById = studentService.findStudentById(studentId);
+		System.out.println("---------"+studentId);
+		
+		 if(!studentById.getId().isEmpty()){
+			 
+			try{
+				model.addAttribute("userName", principal.getName());
+				model.addAttribute("student",studentById);
+		       		return "viewStudent";
+			}
+			catch(Exception e){
+				return "error";
+			}
+			
+		 }
+	       
+		 }
 
 }

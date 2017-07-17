@@ -31,9 +31,8 @@ body {
 
 #rigthLogout{
 	float:right;
-	margin-top:-40pt;
-	margin-right:10pt;
 	font-size:14pt;
+	color: white;
 }
 
 .list a {
@@ -60,7 +59,6 @@ body {
 	margine-left:5px;
 	color:blue;
 }
-#facultyViewCourse{text-align:center;}
 
    .courseList{
    position:absolute;
@@ -104,4 +102,13 @@ caption {
 
 th {
   background: #eee;
+}
+.spanId{
+	color:red;
+}
+.divFindStudent{
+	margin-left:10pt;
+    width: 40%;
+    padding-top: 17pt;
+	margin-bottom:42%;
 }
