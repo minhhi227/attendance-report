@@ -32,8 +32,8 @@
                      <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/attendance/manage">Manage attendance</a></li>
-                                    <li><a href="/student/find">Find student</a></li>
+                                    <li><a href="/staffWelcome">Manage attendance</a></li>
+                                    <li><a href="/showCourse">Find student</a></li>
                                 </ul>
                      </li>
                      
