@@ -38,15 +38,9 @@ public class UserServiceImpl implements UserService {
 
 	// commit by Pagmaa
 	@Override
-	public List<User> findUsers(String username) {
-    	if(username.isEmpty()){
-    		return userRepository.findAll();
-    	}
-    	else{
-    		List<User> users = new ArrayList<User>();
-    		users.add(userRepository.findByUsername(username));
-		  	return users;
-    		}
+	public List<User> findUsers() {
+    	return userRepository.findAll();
+    	
 	}
 
 	@Override

@@ -28,7 +28,7 @@
 		
 		<div class="row">
 			<div class="col-md-6">
-				<h1>Find student:</h1>
+				<h1>Find user:</h1>
 				<hr>
 				<div>
 					<input type="text" id="userName">
@@ -45,9 +45,25 @@
 							</tr>
 						</thead>
 						<tbody>
+						<c:choose>
+							<c:when test="${!empty user}">
+							<tr>
+									<td>${user.username}</td>
+									<td>*********</td>
+									<td>
+										<ul>
+											<c:forEach items="${user.roles}" var="role">
+
+												<li>${role.name}</li>
+
+											</c:forEach>
+										</ul>
+									</td>
+								</tr>
+						</c:when>
+						<c:otherwise>
 							<c:forEach var="user" items="${users}">
 								<tr>
-
 									<td>${user.username}</td>
 									<td>*********</td>
 									<td>
@@ -61,6 +77,8 @@
 									</td>
 								</tr>
 							</c:forEach>
+							</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
 				</div>
@@ -73,7 +91,13 @@
 	<script type="text/javascript">
         $('.find').on('click', function () {
         	//alert('test');
-            window.location.href = '/user/find/' + $('#userName').val();
+        	var username=$('#userName').val();
+        	console.log("123"+username);
+        	
+        	if(username)        		
+	            window.location.href = '/user/find/' + username;
+            else
+            	window.location.href = '/user/find';
             
         });
     </script>
