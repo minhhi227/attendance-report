@@ -65,7 +65,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	private String createEmailBody(StudentAttendance sa, String part1, String part2) {
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 
 		sb.append("Dear ");
 		sb.append(sa.getStudent().getFirstName());
@@ -100,7 +100,8 @@ public class EmailServiceImpl implements EmailService {
 		sb.append(part2);
 		sb.append("\n");
 
-		return sb.toString();
+		return sb.toString();*/
+		return "";
 	}
 
 }

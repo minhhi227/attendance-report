@@ -146,12 +146,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 				.map(populateAttendanceArray(barcodeRecords, block.getSessions())).peek(System.out::println)
 				.collect(Collectors.toList());
 
-		OptionalDouble average = studentAttendanceRecords.stream().mapToDouble(sa -> sa.getMeditaionPercentage())
-				.average();
-		if (average.isPresent()) {
+		//OptionalDouble average = studentAttendanceRecords.stream().mapToDouble(sa -> sa.getMeditaionPercentage()).average();
+		/*if (average.isPresent()) {
 			System.out.printf("Average group meditation participation for this class is: %5.1f%s\n",
 					average.getAsDouble(), "%");
-		}
+		}*/
 
 		return studentAttendanceRecords;
 	}

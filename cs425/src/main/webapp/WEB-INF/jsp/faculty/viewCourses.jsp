@@ -26,7 +26,9 @@
 	
 	<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
-	<div class="container">
+	<div class="container body-content">
+	<div class="row">
+	<div class="col-sx-12"> 
 		<h1>Faculty courses list</h1><hr>
 		
 	<c:choose>
@@ -70,6 +72,9 @@
 			</c:otherwise>
 
 		</c:choose>
+	</div>
+	<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
+	</div>
 	</div>
 	<script src="/static/js/jquery-1.11.1.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>

@@ -1,8 +1,10 @@
 package edu.mum.cs.projects.attendance.domain;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.mum.cs.projects.attendance.domain.entity.AcademicBlock;
 import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
 import edu.mum.cs.projects.attendance.domain.entity.Session;
 import edu.mum.cs.projects.attendance.domain.entity.Student;
@@ -59,19 +61,36 @@ public class StudentAttendance {
 	}
 	
 	public List<Session> getSessions() {
-		return courseOffering.getBlock().getSessions();
+		AcademicBlock block = courseOffering.getBlock();
+		if(block != null)
+			return block.getSessions();
+		
+		return null;
+		
 	}
 
+	public long getMaxAttendance(){
+		return attendance.size();
+	}
 	public long getMeditationCount() {
 		return attendance.stream().filter(a -> a).count();
 	}
 	
 	public long getNumberOfRequiredSessions() {
-		return courseOffering.getBlock().getRequiredSessions();
+		AcademicBlock block = courseOffering.getBlock();
+		if(block != null)
+			return block.getRequiredSessions();
+		
+		return 0;
 	}
 
 	public double getMeditaionPercentage() {
-		return 100.0 * getMeditationCount() / courseOffering.getBlock().getRequiredSessions();
+		return 100.0 * getMeditationCount() / getMaxAttendance();
+	}
+	
+	public String getMeditaionPercentageString()
+	{
+		return new DecimalFormat("#.##").format(getMeditaionPercentage());
 	}
 
 	public double getMeditationExtraGrade() {
@@ -92,7 +111,7 @@ public class StudentAttendance {
 
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		/*StringBuffer sb = new StringBuffer();
 
 		sb.append("Attendance [");
 		sb.append(getStudent().getStudentId());
@@ -116,6 +135,7 @@ public class StudentAttendance {
 		sb.append(String.format("%5.1f", (float) (100.0 * presentCount) / requiredSessions));
 		sb.append("%]");
 
-		return sb.toString();
+		return sb.toString();*/
+		return "";
 	}
 }

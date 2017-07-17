@@ -16,8 +16,8 @@
     <link href="/static/css/style.css" rel="stylesheet">
     
     <!--[if lt IE 9]>
-		<script src="static/js/html5shiv.min.js"></script>
-		<script src="static/js/respond.min.js"></script>
+		<script src="/static/js/html5shiv.min.js"></script>
+		<script src="/static/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body>
@@ -35,25 +35,32 @@
 			<c:when test="${studentattendances.size()!=0}">
 				<table>
 					<tr>
-						<th>Course-Number</th>
-						<th>Course-Name</th>
-						<th>Course-StartDate</th>
-						<th>Enrolled</th>
-						<th>Capacity</th>
-						<th>Active</th>
+						<th>Course</th>
+						<th>Student</th>
+						<th>Full name</th>
+						<th>Max attendance</th>
+						<th>Participated</th>
+						<th>Percentage</th>
+						<th>Grade</th>
 
 
 					</tr>
 					<c:forEach items="${studentattendances}" var="studentattendance">
 						<tr>
-							<td><c:out value="${studentattendance.courseOffering.id}" /></td>
+							<td><c:out value="${studentattendance.courseOffering.course.number}" /></td>
+							<td><c:out value="${studentattendance.student.studentId}" /></td>
+							<td><c:out value="${studentattendance.student.firstName} ${studentattendance.student.lastName}" /></td> 
+							<td><c:out value="${studentattendance.getMaxAttendance()}" /></td>
+							<td><c:out value="${studentattendance.getMeditationCount()}" /></td>
+							<td><c:out value="${studentattendance.getMeditaionPercentageString()}%" /></td>
+							<td><c:out value="${studentattendance.getMeditationExtraGrade()}" /></td>
 						</tr>
 					</c:forEach>
 
 				</table>
 			</c:when>
 			<c:otherwise>
-				<b>No Record is found for the past six Months!</b>
+				<b>There are no record!</b>
 			</c:otherwise>
 	</c:choose>
 	</div>
@@ -62,6 +69,7 @@
 </div>
 </div>
 
-	<script src="/static/js/jquery-1.11.1.min.js"></script>    
+	<script src="/static/js/jquery-1.11.1.min.js"></script>   
+	<script src="/static/js/bootstrap.min.js"></script> 
 </body>
 </html>
