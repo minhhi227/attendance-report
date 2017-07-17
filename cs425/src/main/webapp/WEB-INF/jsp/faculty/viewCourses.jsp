@@ -10,7 +10,7 @@
     <meta http-equiv="Pragma" content="no-cache"> 
     <meta http-equiv="Cache-Control" content="no-cache"> 
     <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
-    
+
     <title>Faculty courses | Home</title>
     
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -27,9 +27,7 @@
 	<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
 	<div class="container">
-		<h1>Students attendance by course</h1><hr>
-
-
+		<h1>Faculty courses list</h1><hr>
 		
 	<c:choose>
 			<c:when test="${listOfAll.size()!=0}">
@@ -41,6 +39,7 @@
 						<th>Enrolled</th>
 						<th>Capacity</th>
 						<th>Active</th>
+						<th>Attendance</th>
 
 
 
@@ -54,6 +53,8 @@
 							<td><c:out value="${course.enrolled}" /></td>
 							<td><c:out value="${course.capacity}" /></td>
 							<td><c:out value="${course.active}" /></td>
+							<td><a href="/attendance/course/${course.id}">View</a></td>
+							
 
 						</tr>
 					</c:forEach>
@@ -70,6 +71,8 @@
 
 		</c:choose>
 	</div>
-<script src="/static/js/jquery-1.11.1.min.js"></script>    
+	<script src="/static/js/jquery-1.11.1.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	
 </body>
 </html>
