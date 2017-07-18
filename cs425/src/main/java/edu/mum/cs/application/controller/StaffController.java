@@ -36,14 +36,10 @@ public class StaffController {
 	@Autowired
 	private CourseService courseService;
 	
-	String id;
+	//String id;
 	
-	@RequestMapping("/staffWelcome")
-	public String staffWelcome(Model model){
-		return "staff/staffWelcome";
-	}
-	
-	@RequestMapping(value="/course/{studentId}", method=RequestMethod.GET)
+		
+	/*@RequestMapping(value="/course/{studentId}", method=RequestMethod.GET)
 	public String allCourseByStudent(@PathVariable("studentId") String studentId, HttpServletRequest request,Model model){
 		
 		Principal principal = request.getUserPrincipal();
@@ -55,19 +51,22 @@ public class StaffController {
 		model.addAttribute("today", today);
 
 		return "staff/courses";
-	}
-	@RequestMapping(value = "/attendance/{courseid}", method=RequestMethod.GET)
-	public String allAttendanceByStudent(@PathVariable int courseid,HttpServletRequest request, Model model){
+	}*/
+	
+	
+	
+	@RequestMapping(value = "/attendance/{courseid}/{studentId}", method=RequestMethod.GET)
+	public String allAttendanceByStudent(@PathVariable Long courseid,@PathVariable String studentId, HttpServletRequest request, Model model){
 		
-System.out.println("----------------------------------");
+		System.out.println("----------------------------------");
 		System.out.println(courseid);
 		
-		CourseOffering courseOffering = courseService.getCourseOffering((long) courseid);
+		CourseOffering courseOffering = courseService.getCourseOffering(courseid);
 		String msg = "";
 		try
         {
 			msg = "Detail Record";
-		    StudentAttendance attendance = studentService.getAttendanceByCourseOffering(id, courseOffering);
+		    StudentAttendance attendance = studentService.getAttendanceByCourseOffering(studentId, courseOffering);
        
 		    model.addAttribute("meditaionPercentage", (int)attendance.getMeditaionPercentage());
 		    model.addAttribute("meditationCount", attendance.getMeditationCount());
@@ -87,22 +86,19 @@ System.out.println("----------------------------------");
 			msg = "No Record";
         }
 		model.addAttribute("msg",msg);
-		model.addAttribute("userName", id);
-		model.addAttribute("student",studentService.findStudentById(id));
+		model.addAttribute("userName", studentId);
+		model.addAttribute("student",studentService.findStudentById(studentId));
 
 		return "staff/viewAttendanceByStudent";
 	}
 		
-	
-
-	
-	@RequestMapping(value="/deleteAttendanceRecord/{id}")
-	public String  deleteAttendanceRecordByStudentId(Model model, @RequestParam("attendance id") String id){
+	@RequestMapping(value="/attendance/delete/{studentId}/{date}")
+	public String  deleteAttendanceRecordByStudentId(Model model, @PathVariable String studentId){
 		String msg="";
-		studentService.findStudentById(id);
+		studentService.findStudentById(studentId);
 		
 		try{
-		staffRepository.delete(id);
+		staffRepository.delete(studentId);
 	       msg = "record deleted successfully !";
 		}
 		catch(Exception ex){

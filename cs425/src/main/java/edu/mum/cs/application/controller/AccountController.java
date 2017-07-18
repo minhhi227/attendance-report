@@ -70,7 +70,7 @@ public class AccountController {
     	}
     	else if(role.getName().equals("ROLE_STAFF")){
     		
-    		return "redirect:/staff/courses";
+    		return "redirect:/student/find";
     	}
     	else{
     		
