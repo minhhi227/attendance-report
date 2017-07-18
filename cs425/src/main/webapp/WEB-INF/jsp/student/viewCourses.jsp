@@ -2,7 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -23,7 +23,7 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
+<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
 			<div class="container text-center" id="tasksDiv">
 				<h3>Course List</h3>

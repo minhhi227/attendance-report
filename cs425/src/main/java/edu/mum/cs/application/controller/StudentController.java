@@ -42,17 +42,17 @@ public class StudentController {
 	
 	@RequestMapping("/courses")
 	public String allCourseByStudent(HttpServletRequest request, Model model){
-		//Principal principal = request.getUserPrincipal();
-		HttpSession session=request.getSession();
+		Principal principal = request.getUserPrincipal();
+		//HttpSession session=request.getSession();
 		//String studentId = request.getParameter("studentId");
-		String studentId=session.getAttribute("studentId").toString();
-		System.out.println("+++++++"+studentId);
+		//String studentId=session.getAttribute("studentId").toString();
+		//System.out.println("+++++++"+studentId);
 		Date today = new Date();
-		//model.addAttribute("userName", principal.getName());
-		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(studentId));
-		//model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+		model.addAttribute("userName", principal.getName());
+		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(principal.getName()));
+		model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
 		model.addAttribute("today", today);
-
+		
 		return "student/viewCourses";
 	}
 	

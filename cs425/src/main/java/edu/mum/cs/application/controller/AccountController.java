@@ -59,16 +59,20 @@ public class AccountController {
     	Principal principal = request.getUserPrincipal();
     	Role role = userService.getRoles(principal.getName()).get(0);
     	
-    	if(role.getName().equals("Student")){
+    	if(role.getName().equals("ROLE_STUDENT")){
+    		
     		return "redirect:/student/courses";
     	}
-    	else if(role.getName().equals("Faculty")){
+    	else if(role.getName().equals("ROLE_FACULTY")){
+    		
     		return "redirect:/faculty/courses";
     	}
-    	else if(role.getName().equals("Staff")){
+    	else if(role.getName().equals("ROLE_STAFF")){
+    		
     		return "redirect:/staff/courses";
     	}
     	else{
+    		
     		return "redirect:/admin/courses";
     	}
 

@@ -23,8 +23,9 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
+<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
+		
 			<div class="container text-center" id="tasksDiv">
 				<h1>${msg}</h1>
 				<hr>
