@@ -54,6 +54,20 @@ public class UserServiceImpl implements UserService {
 		return roleRepository.findOne(id);
 	}
 	
+	@Override
+	public void deleteUser(String userName){
+		User user = userRepository.findByUsername(userName);
+		
+		userRepository.delete(user);
+	}
+	
+	@Override
+	public void updateUser(User user){
+		//User user = userRepository.findByUsername(userName);
+		
+		userRepository.save(user);
+	}
+	
 	// @Override
 	// public String getRole(String username) {
 	// // TODO Auto-generated method stub

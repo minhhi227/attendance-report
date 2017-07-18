@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 /**
  * Created by orifjon9 on 7/6/2017.
  */
-@RestController
-@RequestMapping("/courses")
+/*@RestController
+@RequestMapping("/courses")*/
 public class CourseController {
 
     @RequestMapping(method = RequestMethod.GET)

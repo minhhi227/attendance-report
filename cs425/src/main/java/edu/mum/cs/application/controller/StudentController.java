@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.mum.cs.projects.attendance.domain.StudentAttendance;
 import edu.mum.cs.projects.attendance.domain.entity.CourseOffering;
 import edu.mum.cs.projects.attendance.domain.entity.Student;
+import edu.mum.cs.projects.attendance.domain.entity.User;
 import edu.mum.cs.projects.attendance.service.CourseServiceImpl;
 import edu.mum.cs.projects.attendance.service.StudentService;
 import edu.mum.cs.projects.attendance.service.StudentServiceImpl;
+import edu.mum.cs.projects.attendance.service.UserService;
 
 /**
  * Created by orifjon9 on 7/5/2017.
@@ -40,17 +42,19 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 	
+	@Autowired
+	private UserService  userService;
+	
 	@RequestMapping("/courses")
 	public String allCourseByStudent(HttpServletRequest request, Model model){
-		//Principal principal = request.getUserPrincipal();
-		//HttpSession session=request.getSession();
-		//String studentId = request.getParameter("studentId");
-		//String studentId=session.getAttribute("studentId").toString();
-		//System.out.println("+++++++"+studentId);
+		
+		Principal principal = request.getUserPrincipal();
+		User user = userService.findByUsername(principal.getName());
+		
+        model.addAttribute("userName", principal.getName());
+        
 		Date today = new Date();
-		//model.addAttribute("userName", principal.getName());
-		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId("000-98-2670"));
-		//model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(user.getStore()));
 		model.addAttribute("today", today);
 
 		return "student/viewCourses";

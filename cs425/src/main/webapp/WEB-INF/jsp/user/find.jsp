@@ -27,7 +27,7 @@
 <div class="container body-content">
 		
 		<div class="row">
-			<div class="col-sx-12">
+			<div class="col-md-8">
 				<h1>Find user:</h1>
 				<hr>
 				<div class="margin-bottom">
@@ -56,9 +56,7 @@
 									<td>
 										<ul>
 											<c:forEach items="${user.roles}" var="role">
-
-												<li>${role.name}</li>
-
+												<li class="role">${role.name}</li>
 											</c:forEach>
 										</ul>
 									</td>
@@ -75,7 +73,7 @@
 										<ul>
 											<c:forEach items="${user.roles}" var="role">
 
-												<li>${role.name}</li>
+												<li class="role">${role.name}</li>
 
 											</c:forEach>
 										</ul>
@@ -97,10 +95,19 @@
 	<script src="/static/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 	<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$('.role').each(function() {
+				
+				var text = $(this).text();
+				text = text.replace('ROLE_','');
+				$(this).text(text);
+			});
+		});
+	
         $('.find').on('click', function () {
         	//alert('test');
         	var username=$('#userName').val();
-        	//console.log("123"+username);
         	
         	if(username)        		
 	            window.location.href = '/user/find/' + username;

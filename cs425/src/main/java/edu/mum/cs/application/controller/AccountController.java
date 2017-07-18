@@ -74,7 +74,7 @@ public class AccountController {
     	}
     	else{
     		
-    		return "redirect:/admin/courses";
+    		return "redirect:/user/find";
     	}
 
     }

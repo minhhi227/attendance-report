@@ -70,9 +70,10 @@
 			</c:otherwise>
 
 		</c:choose>
+		
+	<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
 	</div>
 	<script src="/static/js/jquery-1.11.1.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
-	<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
 </body>
 </html>

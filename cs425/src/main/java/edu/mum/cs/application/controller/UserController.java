@@ -25,6 +25,7 @@ import edu.mum.cs.projects.attendance.domain.entity.Faculty;
 import edu.mum.cs.projects.attendance.domain.entity.Role;
 import edu.mum.cs.projects.attendance.domain.entity.Student;
 import edu.mum.cs.projects.attendance.domain.entity.User;
+import edu.mum.cs.projects.attendance.service.FacultyService;
 import edu.mum.cs.projects.attendance.service.SecurityService;
 import edu.mum.cs.projects.attendance.service.StudentService;
 import edu.mum.cs.projects.attendance.service.UserService;
@@ -41,6 +42,9 @@ public class UserController {
 
     @Autowired
     private SecurityService securityService;
+    
+    @Autowired
+    private FacultyService facultyService;
 
     @Autowired
     private UserValidator userValidator;
@@ -49,12 +53,7 @@ public class UserController {
     public String findUser(@PathVariable String userName, Model model, HttpServletRequest request) {
     	model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("user", userService.findByUsername(userName));
-       /*System.out.println(userName);
-       
-       for(int i =0; i<50; i++) {
-    	   System.out.println("**************");
-       }*/
-              
+                     
         return "/user/find";
     }
     
@@ -62,33 +61,46 @@ public class UserController {
     public String findUserAll(Model model, HttpServletRequest request) {
     	model.addAttribute("userName", request.getUserPrincipal().getName());
         model.addAttribute("users", userService.findUsers());
-       
-         
-        /*for(int i =0; i<15; i++) {
-     	   System.out.println("-----------------");
-        }*/
+               
         return "/user/find";
     }
     
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
-    public String createUserView(Model model) {
-        model.addAttribute("userForm", new User());
-       // model.addAttribute("role", new Role());
+    public String createUserView(Model model, HttpServletRequest request) {
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
+        
         
         return "/user/create";
+    }
+    
+    @RequestMapping(value = "/user/update/{userName}", method = RequestMethod.GET)
+    public String updateUserView(@PathVariable String userName, Model model, HttpServletRequest request) {
+    	
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
+        model.addAttribute("user", userService.findByUsername(userName));
+        
+        return "/user/update";
     }
     
     @RequestMapping(value = "/user/create", method = RequestMethod.POST)
     public @ResponseBody String create(@RequestParam String username, @RequestParam String password,@RequestParam String roleId,@RequestParam String storeStudent,@RequestParam String storeFaculty) {
         
+    	User tmp = userService.findByUsername(username);
+    	if(tmp !=null){
+    		return "User is exists in database.";
+    	}
+    	    	
     	Long roleid = Long.parseLong(roleId);    	
     	User user = new User();
     	user.setUsername(username);
     	user.setPassword(password);
     	user.setStore(roleid == 3 ? storeFaculty : (roleid == 4 ? storeStudent : ""));
-    	
+    	    	   	
     	if(roleid == 3){
-    		//Faculty faculty =  
+    		Faculty faculty =  facultyService.findFaculty(Long.parseLong(storeFaculty));
+    		if(faculty == null){
+    			return "Faculty was not found.";
+    		}
     	}else if(roleid == 4){
     		Student student = studentService.findStudentById(storeStudent);
     		if(student == null){
@@ -103,13 +115,25 @@ public class UserController {
         userService.save(user);
         
         return "success";
-        
-    }
+   }
     
-    @RequestMapping(value = "/user/delete/{username}")
+    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    public @ResponseBody String update(@RequestParam String username, @RequestParam String password) {
+        
+    	User user = userService.findByUsername(username);
+    	if(user == null){
+    		return "User is not exists in database.";
+    	}
+    	
+    	user.setPassword(password); 	
+    	userService.save(user);
+        return "success";
+   }
+    
+    @RequestMapping(value = "/user/delete/{userName}")
     public String delete(@PathVariable String userName, Model model) {
         
-       //userService.
+       userService.deleteUser(userName);
         
         return "redirect:/user/find";
     }
