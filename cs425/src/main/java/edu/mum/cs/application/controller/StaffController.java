@@ -22,6 +22,7 @@ import edu.mum.cs.projects.attendance.service.CourseService;
 import edu.mum.cs.projects.attendance.service.StudentService;
 
 @Controller
+@RequestMapping("/staff")
 public class StaffController {
 
 	
@@ -42,11 +43,11 @@ public class StaffController {
 		return "staff/staffWelcome";
 	}
 	
-	@RequestMapping(value="/showCourse/{studentId}", method=RequestMethod.GET)
+	@RequestMapping(value="/course/{studentId}", method=RequestMethod.GET)
 	public String allCourseByStudent(@PathVariable("studentId") String studentId, HttpServletRequest request,Model model){
 		
 		Principal principal = request.getUserPrincipal();
-		//id=studentId;
+		id=studentId;
 		Date today = new Date();
 		model.addAttribute("userName", principal.getName());
 		model.addAttribute("enrolled", studentService.getEnrolledByStudentId(studentId));
@@ -55,9 +56,11 @@ public class StaffController {
 
 		return "staff/courses";
 	}
-	@RequestMapping(value="/getAttendanceByCourse")
+	@RequestMapping(value = "/attendance/{courseid}", method=RequestMethod.GET)
 	public String allAttendanceByStudent(@PathVariable int courseid,HttpServletRequest request, Model model){
 		
+System.out.println("----------------------------------");
+		System.out.println(courseid);
 		
 		CourseOffering courseOffering = courseService.getCourseOffering((long) courseid);
 		String msg = "";
@@ -87,7 +90,7 @@ public class StaffController {
 		model.addAttribute("userName", id);
 		model.addAttribute("student",studentService.findStudentById(id));
 
-		return "staff/courses";
+		return "staff/viewAttendanceByStudent";
 	}
 		
 	
@@ -96,6 +99,8 @@ public class StaffController {
 	@RequestMapping(value="/deleteAttendanceRecord/{id}")
 	public String  deleteAttendanceRecordByStudentId(Model model, @RequestParam("attendance id") String id){
 		String msg="";
+		studentService.findStudentById(id);
+		
 		try{
 		staffRepository.delete(id);
 	       msg = "record deleted successfully !";
