@@ -30,6 +30,7 @@ public interface StudentService {
 	}
 	
 	List<Enrollment> getEnrolledByStudentId(String studentId);
+	
 	Student findStudentById(String studentId);
 	
 	StudentAttendance getAttendanceByCourseOffering(String studentId, CourseOffering courseOffering);

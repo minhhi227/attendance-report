@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.OptionalDouble;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
@@ -154,11 +155,54 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 		return studentAttendanceRecords;
 	}
+	
+	
 
 	public List<StudentAttendance> getStudentAttendanceRecordsByCourseOffering(Long CourseOfferingId){
 		CourseOffering courseOffering = courseService.getCourseOffering(CourseOfferingId);
 		
 		return retrieveStudentAttendanceRecords(courseOffering);
+	}
+	
+	public List<StudentAttendance> getStudentAttendanceRecordsByStudent(String studentId){
+		
+		String barcode = studentService.getBarcodeId(studentId);
+		List<Enrollment> enrollments = studentService.getEnrolledByStudentId(studentId);
+		
+		if (null == enrollments || enrollments.isEmpty()) {
+			return null;
+		}
+
+		List<StudentAttendance> studentAttendanceRecords = new ArrayList<>();		
+		
+		for(Enrollment enrollment : enrollments){
+			CourseOffering courseOffering = enrollment.getOffering();
+			
+			AcademicBlock block = courseService
+					.getAcademicBlock(DateUtil.convertDateToString(courseOffering.getStartDate()));
+	
+			Date beginDate = DateUtil.convertLocalDateToDate(block.getBeginDate());
+			Date endDate = DateUtil.convertLocalDateToDate(block.getEndDate());
+			
+			List<BarcodeRecord> barcodeRecords = barcodeRecordRepository.findByDateBetween(beginDate, endDate)
+					.stream().filter(f->f.getBarcode().equals(barcode)).collect(Collectors.toList());
+	
+			System.out.println("\nCreating attendance report for: " + courseOffering.getCourse() + " by "
+					+ courseOffering.getFaculty());
+	
+			studentAttendanceRecords.addAll(Stream.of(enrollment)
+					.map(e -> new StudentAttendance(e.getStudent(), e.getOffering()))
+					.map(populateAttendanceArray(barcodeRecords, block.getSessions()))
+					.peek(System.out::println)
+					.collect(Collectors.toList()));
+	
+			//OptionalDouble average = studentAttendanceRecords.stream().mapToDouble(sa -> sa.getMeditaionPercentage()).average();
+			/*if (average.isPresent()) {
+				System.out.printf("Average group meditation participation for this class is: %5.1f%s\n",
+						average.getAsDouble(), "%");
+			}*/
+		}
+		return studentAttendanceRecords;
 	}
 	
 	private Function<StudentAttendance, StudentAttendance> populateAttendanceArray(List<BarcodeRecord> barcodeRecords,

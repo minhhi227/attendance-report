@@ -34,5 +34,5 @@ public interface AttendanceService {
 	void createAttendanceReportForEntries(String startDate);
 
 	void countAttendancePerDay();
-	
+	List<StudentAttendance> getStudentAttendanceRecordsByStudent(String studentId);
 }
