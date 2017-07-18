@@ -60,11 +60,11 @@
 									<c:choose>
 									    <c:when test="${map.value == true}">
 									        <td><span class="glyphicon glyphicon-ok"></span></td> 
-									        <td><a href="staff/deleteAttendanceRecord/${map.key}">Delete</a></td> 
+									        <td><a href="/staff/attendance/delete/${map.key}/${student.id}">Delete</a></td> 
 									    </c:when>    
 									    <c:otherwise>
 									         <td><span class="glyphicon glyphicon-minus"></span></td>
-									         <td><a href="staff/addAttendanceRecord/${map.key}">Create</a></td> 
+									         <td><a href="/staff/attendance/add/${map.key}/${student.id}">Create</a></td> 
 									    </c:otherwise>
 									</c:choose>
 								</tr>
