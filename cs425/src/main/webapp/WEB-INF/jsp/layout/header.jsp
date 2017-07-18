@@ -22,6 +22,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/student/courses">View course</a></li>
+                                     <li><a href="/student/report">View report</a></li>
                                 </ul>
                             </li>
                     </sec:authorize>
