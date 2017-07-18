@@ -10,5 +10,6 @@ public interface UserService {
 	void save(User user);
 	User findByUsername(String username);
 	List<Role> getRoles(String username);
+	Role getRole(Long id);
 	List<User> findUsers();
 }

@@ -16,8 +16,8 @@
     <link href="/static/css/style.css" rel="stylesheet">
     
     <!--[if lt IE 9]>
-		<script src="static/js/html5shiv.min.js"></script>
-		<script src="static/js/respond.min.js"></script>
+		<script src="/static/js/html5shiv.min.js"></script>
+		<script src="/static/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body>
@@ -27,12 +27,13 @@
 <div class="container body-content">
 		
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-sx-12">
 				<h1>Find user:</h1>
 				<hr>
-				<div>
-					<input type="text" id="userName">
-					<button class="find" name="findUserButton">Find</button>
+				<div class="margin-bottom">
+					<input type="text" id="userName" class="form-control" style="width: 300px; display: contents;">
+					<button class="find btn btn-primary" name="findUserButton">Find</button>
+					<a href="/user/create">Create user</a>
 					
 				</div>
 				<div class="table-responsive">
@@ -42,6 +43,8 @@
 								<th>User Name</th>
 								<th>Password</th>
 								<th>Role</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -59,6 +62,8 @@
 											</c:forEach>
 										</ul>
 									</td>
+										<td><a href="/user/update/${user.username}">edit</a></td>
+										<td><a href="/user/delete/${user.username}">delete</a></td>
 								</tr>
 						</c:when>
 						<c:otherwise>
@@ -74,6 +79,9 @@
 
 											</c:forEach>
 										</ul>
+										
+										<td><a href="/user/update/${user.username}">edit</a></td>
+										<td><a href="/user/delete/${user.username}">delete</a></td>
 									</td>
 								</tr>
 							</c:forEach>
@@ -92,7 +100,7 @@
         $('.find').on('click', function () {
         	//alert('test');
         	var username=$('#userName').val();
-        	console.log("123"+username);
+        	//console.log("123"+username);
         	
         	if(username)        		
 	            window.location.href = '/user/find/' + username;

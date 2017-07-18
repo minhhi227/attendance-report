@@ -112,3 +112,11 @@ th {
     padding-top: 17pt;
 	margin-bottom:30%;
 }
+
+.margin-bottom {
+	margin-bottom:10px;
+}
+
+.hidden{
+	display:none;
+}

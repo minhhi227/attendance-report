@@ -42,17 +42,17 @@ public class StudentController {
 	
 	@RequestMapping("/courses")
 	public String allCourseByStudent(HttpServletRequest request, Model model){
-		Principal principal = request.getUserPrincipal();
+		//Principal principal = request.getUserPrincipal();
 		//HttpSession session=request.getSession();
 		//String studentId = request.getParameter("studentId");
 		//String studentId=session.getAttribute("studentId").toString();
 		//System.out.println("+++++++"+studentId);
 		Date today = new Date();
-		model.addAttribute("userName", principal.getName());
-		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(principal.getName()));
-		model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+		//model.addAttribute("userName", principal.getName());
+		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId("000-98-2670"));
+		//model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
 		model.addAttribute("today", today);
-		
+
 		return "student/viewCourses";
 	}
 	
@@ -93,28 +93,28 @@ public class StudentController {
 	}
 	
 	
-	@RequestMapping("/findStudent")
-	public String student(HttpServletRequest request){
-		return "student/findStudent";
+	@RequestMapping("/find")
+	public String student(HttpServletRequest request, Model model){
+		model.addAttribute("userName", request.getUserPrincipal().getName());
+		return "student/find";
 		
 	}
 
 	// 000-98-3209
-	@RequestMapping(value = "/findStudentById", method = RequestMethod.GET)
-	public String findStudent(HttpServletRequest request, Model model) {
+	@RequestMapping("/find/{studentId}")
+	public String student(@PathVariable String studentId, HttpServletRequest request, Model model){
 		
 		Principal principal = request.getUserPrincipal();
-		String studentId = request.getParameter("studentId");
-		Student studentById = studentService.findStudentById(studentId);
-		//--------------------
-		System.out.println("---------" + studentId);
-		HttpSession session=request.getSession();
-		session.setAttribute("studentId", studentId);
 		
+		Student studentById = studentService.findStudentById(studentId);
+	
 		model.addAttribute("userName", principal.getName());
 		model.addAttribute("student", studentById);
+		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(studentById.getId()));
+		//model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+		model.addAttribute("today", new Date());
 		
-		return "student/viewStudent";
+		return "student/find";
 		
 	}
 
