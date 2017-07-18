@@ -45,7 +45,7 @@
 								<tr>
 									<td>${enrolled.offering.course.number}</td>
 									<td>${enrolled.offering.course.name}</td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${enrolled.offering.startDate}"/></td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${enrolled.offering.startDate}"/></td>
 									<td>${enrolled.offering.period}</td>
 									<td>${enrolled.offering.faculty.firstName}</td>
 									<c:choose>
