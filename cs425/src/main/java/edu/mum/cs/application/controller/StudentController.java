@@ -162,12 +162,15 @@ public class StudentController {
 		
 		Student studentById = studentService.findStudentById(studentId);
 	
-		model.addAttribute("userName", principal.getName());
-		model.addAttribute("student", studentById);
-		model.addAttribute("enrolled", studentServiceImpl.getEnrolledByStudentId(studentById.getId()));
-		
-		model.addAttribute("today", new Date());
-		
+		if (studentById == null) {
+			model.addAttribute("error", principal.getName());
+		} else {
+			model.addAttribute("userName", principal.getName());
+			model.addAttribute("student", studentById);
+			model.addAttribute("enrolled", studentService.getEnrolledByStudentId(studentById.getId()));
+			// model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+			model.addAttribute("today", new Date());
+		}
 		return "student/find";
 		
 	}
