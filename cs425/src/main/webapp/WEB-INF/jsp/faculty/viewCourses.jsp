@@ -33,6 +33,8 @@
 			<c:when test="${listOfAll.size()!=0}">
 				<table>
 					<tr>
+					    <th>Full Name</th>
+					     <th>Faculty-Id</th>
 						<th>Course-Number</th>
 						<th>Course-Name</th>
 						<th>Course-StartDate</th>
@@ -47,6 +49,8 @@
 					</tr>
 					<c:forEach items="${listOfAll}" var="course">
 						<tr>
+						   <td><c:out value="${course.faculty.firstName} ${course.faculty.lastName}"/></td>
+						   <td><c:out value="${course.faculty.id}" /></td>
 							<td><c:out value="${course.course.number}" /></td>
 							<td><c:out value="${course.course.name}" /></td>
 							<td><c:out value="${course.startDate}" /></td>
