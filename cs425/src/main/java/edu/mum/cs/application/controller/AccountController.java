@@ -59,6 +59,8 @@ public class AccountController {
     public String welcome(Model model, HttpServletRequest request) {
     	Principal principal = request.getUserPrincipal();
     	Role role = userService.getRoles(principal.getName()).get(0);
+
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
     	
     	return "index";
     	/*if(role.getName().equals("ROLE_STUDENT")){
@@ -81,12 +83,14 @@ public class AccountController {
     }
     
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
-    public String about() {
+    public String about(Model model, HttpServletRequest request) {
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
     	return "about";
     }
     
     @RequestMapping(value = {"/contact"}, method = RequestMethod.GET)
-    public String contact() {
+    public String contact(Model model, HttpServletRequest request) {
+    	model.addAttribute("userName", request.getUserPrincipal().getName());
     	return "contact";
     }
 }
