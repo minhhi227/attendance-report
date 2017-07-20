@@ -78,14 +78,15 @@ public class StudentController {
 	@RequestMapping(value = "/report", method = RequestMethod.GET)
 	public String allReport(HttpServletRequest request, Model model){
 		Principal principal = request.getUserPrincipal();
-		List<Enrollment> enrollments = studentServiceImpl.getEnrolledByStudentId(principal.getName());
+		User user = userService.findByUsername(principal.getName());
+		List<Enrollment> enrollments = studentServiceImpl.getEnrolledByStudentId(user.getStore());
 		List<Integer> number = new ArrayList();
 		List<String> xAxis = new ArrayList();
 		
 		for(Enrollment e: enrollments ){
 			xAxis.add(e.getOffering().getCourse().getNumber());
 			try{
-			StudentAttendance attendance = studentServiceImpl.getAttendanceByCourseOffering(principal.getName(), e.getOffering());
+			StudentAttendance attendance = studentServiceImpl.getAttendanceByCourseOffering(user.getStore(), e.getOffering());
 			number.add((int)attendance.getMeditationCount()*(100/25));
 			}
 			catch(NullPointerException ex)
