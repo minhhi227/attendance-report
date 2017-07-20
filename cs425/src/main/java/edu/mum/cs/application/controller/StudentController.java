@@ -114,13 +114,14 @@ public class StudentController {
 	public String allAttendanceByStudent(@PathVariable int id,HttpServletRequest request, Model model){
 		
 		Principal principal = request.getUserPrincipal();
+		User user = userService.findByUsername(principal.getName());
 		
 		CourseOffering courseOffering = courseServiceImpl.getCourseOffering((long) id);
 		String msg = "";
 		try
         {
 			msg = "Detail Record";
-		    StudentAttendance attendance = studentServiceImpl.getAttendanceByCourseOffering(principal.getName(), courseOffering);
+		    StudentAttendance attendance = studentServiceImpl.getAttendanceByCourseOffering(user.getStore(), courseOffering);
        
 		    model.addAttribute("meditaionPercentage", (int)attendance.getMeditaionPercentage());
 		    model.addAttribute("meditationCount", attendance.getMeditationCount());
