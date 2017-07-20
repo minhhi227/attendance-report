@@ -166,10 +166,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 	
 	public List<StudentAttendance> getStudentAttendanceRecordsByStudent(String studentId){
 		
-		String barcode = studentService.getBarcodeId(studentId);
+		Student student = studentService.findStudentById(studentId);
 		List<Enrollment> enrollments = studentService.getEnrolledByStudentId(studentId);
 		
-		if (null == enrollments || enrollments.isEmpty() || barcode == null) {
+		if (null == enrollments || enrollments.isEmpty() || (student == null || student.getBarcode() == null)) {
 			return null;
 		}
 
@@ -181,11 +181,15 @@ public class AttendanceServiceImpl implements AttendanceService {
 			AcademicBlock block = courseService
 					.getAcademicBlock(DateUtil.convertDateToString(courseOffering.getStartDate()));
 	
+			if(block == null) continue;
+			
 			Date beginDate = DateUtil.convertLocalDateToDate(block.getBeginDate());
 			Date endDate = DateUtil.convertLocalDateToDate(block.getEndDate());
 			
-			List<BarcodeRecord> barcodeRecords = barcodeRecordRepository.findByDateBetween(beginDate, endDate)
-					.stream().filter(f->f.getBarcode().equals(barcode)).collect(Collectors.toList());
+			List<BarcodeRecord> barcodeRecords = barcodeRecordRepository.findByDateBetween(beginDate, endDate);
+			
+			barcodeRecords = barcodeRecords.stream().filter(f->f.getBarcode().equals(student.getBarcode()))
+					.collect(Collectors.toList());
 	
 			System.out.println("\nCreating attendance report for: " + courseOffering.getCourse() + " by "
 					+ courseOffering.getFaculty());
