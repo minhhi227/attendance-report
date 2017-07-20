@@ -42,9 +42,7 @@
 						<th>Participated</th>
 						<th>Percentage</th>
 						<th>Grade</th>
-
-
-					</tr>
+				</tr>
 					<c:forEach items="${studentattendances}" var="studentattendance">
 						<tr>
 							<td><c:out value="${studentattendance.courseOffering.course.number}" /></td>

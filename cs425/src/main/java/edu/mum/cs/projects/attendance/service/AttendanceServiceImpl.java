@@ -169,7 +169,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 		String barcode = studentService.getBarcodeId(studentId);
 		List<Enrollment> enrollments = studentService.getEnrolledByStudentId(studentId);
 		
-		if (null == enrollments || enrollments.isEmpty()) {
+		if (null == enrollments || enrollments.isEmpty() || barcode == null) {
 			return null;
 		}
 

@@ -160,15 +160,15 @@ public class StudentController {
 		
 		Principal principal = request.getUserPrincipal();
 		
-		Student studentById = studentService.findStudentById(studentId);
+		Student student = studentService.findStudentById(studentId);
 	
-		if (studentById == null) {
+		if (student == null) {
 			model.addAttribute("error", principal.getName());
 		} else {
 			model.addAttribute("userName", principal.getName());
-			model.addAttribute("student", studentById);
-			model.addAttribute("enrolled", studentService.getEnrolledByStudentId(studentById.getId()));
-			// model.addAttribute("student",studentServiceImpl.findStudentById(principal.getName()));
+			model.addAttribute("student", student);
+			model.addAttribute("enrolled", studentService.getEnrolledByStudentId(studentId));
+			
 			model.addAttribute("today", new Date());
 		}
 		return "student/find";

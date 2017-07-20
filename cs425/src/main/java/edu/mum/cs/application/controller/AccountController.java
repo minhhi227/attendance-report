@@ -60,7 +60,8 @@ public class AccountController {
     	Principal principal = request.getUserPrincipal();
     	Role role = userService.getRoles(principal.getName()).get(0);
     	
-    	if(role.getName().equals("ROLE_STUDENT")){
+    	return "index";
+    	/*if(role.getName().equals("ROLE_STUDENT")){
     		
     		return "redirect:/student/courses";
     	}
@@ -75,7 +76,17 @@ public class AccountController {
     	else{
     		
     		return "redirect:/user/find";
-    	}
+    	}*/
 
+    }
+    
+    @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
+    public String about() {
+    	return "about";
+    }
+    
+    @RequestMapping(value = {"/contact"}, method = RequestMethod.GET)
+    public String contact() {
+    	return "contact";
     }
 }

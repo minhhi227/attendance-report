@@ -30,35 +30,7 @@
 	<div class="col-sx-12"> 
 	<h1>View attendance by student</h1>
 	<hr>
-	
-	<%-- <c:choose>
-			<c:when test="${studentattendances.size()!=0}">
-				<table>
-					<tr>
-						<th>Course Code:</th>
-						<th>Course Name:</th>
-						<th>Max attendance</th>
-						<th>Participated</th>
-						<th>Percentage</th>						
-					</tr>
-					<c:forEach var="enrolled" items="${enrolled}" varStatus="status">
-					<tr>
-							<td>${enrolled.offering.course.number}</td>
-							<td>${enrolled.offering.course.name}</td>
-							<td><c:out value="${studentattendance[status.index].getMaxAttendance}" /></td>							
-							<td><c:out value="${studentattendance[status.index].getMeditationCount()}" /></td>
-							<td><c:out value="${studentattendance[status.index].getMeditaionPercentageString()}%" /></td>							
-						</tr>
-					</c:forEach>
 
-				</table>
-			</c:when>
-			<c:otherwise>
-				<b>There are no record!</b>
-			</c:otherwise>
-	</c:choose> --%>
-	
-	
 	<c:choose>
 			<c:when test="${studentattendances.size()!=0}">
 				<table>
@@ -89,10 +61,7 @@
 				<b>There are no record!</b>
 			</c:otherwise>
 	</c:choose>
-	
-	
-	</div>
-	
+</div>
 	<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
 </div>
 </div>

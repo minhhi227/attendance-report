@@ -30,9 +30,7 @@ public class AttendanceController {
 	public String getAttendanceByCourse(@PathVariable Long id, Model model, HttpServletRequest request)
 	{
 		model.addAttribute("userName", request.getUserPrincipal().getName());
-		
 		List<StudentAttendance> studentattendances = attendanceService.getStudentAttendanceRecordsByCourseOffering(id);
-		
 		model.addAttribute("studentattendances", studentattendances);
 		
 		return "/attendance/byCourse";
@@ -43,12 +41,8 @@ public class AttendanceController {
 	public String getAttendanceByStudent(@PathVariable String studentId, Model model, HttpServletRequest request)
 	{
 		model.addAttribute("userName", request.getUserPrincipal().getName());
-		
 		List<StudentAttendance> studentattendances = attendanceService.getStudentAttendanceRecordsByStudent(studentId);
-	
-		
 		model.addAttribute("studentattendances", studentattendances);
-	
 		
 		return "/attendance/byStudent";
 	}

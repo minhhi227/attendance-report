@@ -1,4 +1,5 @@
 package edu.mum.cs.application.controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 public class HomeController {
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+    	model.addAttribute("msg", "Home page");
         return "<a href=\"/students\">students list</a> <br> <a href=\"/courses\">courses list</a>";
     }
 
