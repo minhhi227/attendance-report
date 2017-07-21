@@ -96,7 +96,7 @@ public class CourseServiceImpl implements CourseService {
 		LocalDate beforeSixMonths = today.minusMonths(6);
 
 		for (CourseOffering course : allCoursesByFacultyId) {
-			if (facultyId == course.getFaculty().getId()) {
+			//if (facultyId == course.getFaculty().getId()) {
 				Date startDate = course.getStartDate();
 				String startDatecon = startDate.toString();
 				LocalDate entryDate = LocalDate.parse(startDatecon);
@@ -104,7 +104,7 @@ public class CourseServiceImpl implements CourseService {
 
 					lastSixMonthCourses.add(course);
 
-				}
+				//}
 
 			}
 

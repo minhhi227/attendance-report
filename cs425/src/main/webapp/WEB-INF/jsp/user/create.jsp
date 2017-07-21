@@ -33,9 +33,9 @@
 				     
 			       <input type="text" id="username" class="form-control margin-bottom" placeholder="Username" autofocus="true"></input>
 			       
-			       <input type="text" id="userpassword" class="form-control margin-bottom" placeholder="Password" autofocus="true"></input>
+			       <input type="password" id="userpassword" class="form-control margin-bottom" placeholder="Password" autofocus="true"></input>
 			       
-			       <input type="text" id="userpassportconf" class="form-control margin-bottom" placeholder="Confirm password" autofocus="true"></input>
+			       <input type="password" id="userpassportconf" class="form-control margin-bottom" placeholder="Confirm password" autofocus="true"></input>
 			       
 			       <select id="role" class="form-control margin-bottom">
 			       		<option value="1">Administrator</option>
